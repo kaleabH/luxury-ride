@@ -5,10 +5,18 @@ import PrimaryButton from '@/Components/PrimaryButton';
 import TextInput from '@/Components/TextInput';
 import { Head, Link, useForm } from '@inertiajs/react';
 
-export default function Register() {
+export default function Register() { 
+
+    const handleChange = (e) => setData('role', e.target.value);
+
     const { data, setData, post, processing, errors, reset } = useForm({
-        name: '',
+        role: 'admin',
+        firstName: '',
+        lastName: '',
         email: '',
+        phone: '',
+        countryCode: 'ET',
+        city: '',
         password: '',
         password_confirmation: '',
     });
@@ -27,20 +35,78 @@ export default function Register() {
 
             <form onSubmit={submit}>
                 <div>
-                    <InputLabel htmlFor="name" value="Name" />
+                    <InputLabel htmlFor="firstName" value="First Name" />
 
                     <TextInput
-                        id="name"
-                        name="name"
-                        value={data.name}
+                        id="firstName"
+                        firstName="firstName"
+                        value={data.firstName}
                         className="mt-1 block w-full"
-                        autoComplete="name"
+                        autoComplete="firstName"
                         isFocused={true}
-                        onChange={(e) => setData('name', e.target.value)}
+                        onChange={(e) => setData('firstName', e.target.value)}
                         required
                     />
 
-                    <InputError message={errors.name} className="mt-2" />
+                    <InputError message={errors.firstName} className="mt-2" />
+                </div>
+                <div>
+                    <InputLabel htmlFor="lastName" value="Last Name" />
+
+                    <TextInput
+                        id="lastName"
+                        lastName="lastName"
+                        value={data.lastName}
+                        className="mt-1 block w-full"
+                        autoComplete="lastName"
+                        isFocused={true}
+                        onChange={(e) => setData('lastName', e.target.value)}
+                        required
+                    />
+
+                    <InputError message={errors.lastName} className="mt-2" />
+                </div>
+                <div>
+                    <InputLabel htmlFor="phone" value="Phone" />
+
+                    <TextInput
+                        id="phone"
+                        phone="phone"
+                        value={data.phone}
+                        className="mt-1 block w-full"
+                        autoComplete="phone"
+                        isFocused={true}
+                        onChange={(e) => setData('phone', e.target.value)}
+                        required
+                    />
+
+                    <InputError message={errors.phone} className="mt-2" />
+                </div>
+
+                <div>
+                    <label htmlFor="role">Select Role: </label>
+                    <select id="role" value={data.role} onChange={handleChange}>
+                        <option value="admin">Admin</option>
+                        <option value="operator">Operator</option>
+                     </select>
+                    {/* <p>Selected Role: {data.role}</p> */}
+                 </div>
+
+                <div>
+                    <InputLabel htmlFor="city" value="City" />
+
+                    <TextInput
+                        id="city"
+                        city="city"
+                        value={data.city}
+                        className="mt-1 block w-full"
+                        autoComplete="city"
+                        isFocused={true}
+                        onChange={(e) => setData('city', e.target.value)}
+                        required
+                    />
+
+                    <InputError message={errors.city} className="mt-2" />
                 </div>
 
                 <div className="mt-4">
